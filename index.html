@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de controle de estacionamento do condomínio.">
+  <title>ParkControl | Controle de Estacionamento</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="ParkControl início">
+        <span class="brand-mark">P</span>
+        <span>park<span class="brand-light">control</span><small>GESTÃO DE ESTACIONAMENTO</small></span>
+      </a>
+      <div class="side-label">MENU PRINCIPAL</div>
+      <nav class="navigation" aria-label="Navegação principal">
+        <button class="nav-link active" data-page="dashboard"><span class="nav-icon">▦</span> Visão geral</button>
+        <button class="nav-link" data-page="cadastro"><span class="nav-icon">＋</span> Nova reserva</button>
+        <button class="nav-link" data-page="cadastradas"><span class="nav-icon">▤</span> Reservas cadastradas</button>
+        <button class="nav-link" data-page="disponiveis"><span class="nav-icon">▥</span> Vagas disponíveis</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card"><span class="help-icon">?</span><strong>Precisa de ajuda?</strong><p>Consulte as informações do sistema de estacionamento.</p></div>
+        <div class="user-mini"><div class="avatar">AD</div><div><strong>Administrador</strong><small>Gestão do condomínio</small></div></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div><span class="eyebrow">CONDOMÍNIO RESIDENCIAL</span><h1 id="page-title">Visão geral</h1></div>
+        <div class="topbar-right"><span class="today" id="today"></span><div class="top-avatar">AD</div></div>
+      </header>
+
+      <section class="page active" id="page-dashboard">
+        <div class="welcome-row"><div><h2>Bem-vindo ao ParkControl</h2><p>Gerencie as reservas e acompanhe a ocupação do estacionamento.</p></div><button class="primary-btn" data-go="cadastro">＋ Nova reserva</button></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total de vagas</span><span class="stat-icon blue">▥</span></div><strong id="stat-total">12</strong><small>Vagas cadastradas no sistema</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Vagas ocupadas</span><span class="stat-icon orange">▣</span></div><strong id="stat-occupied">0</strong><small>Reservas ativas</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Vagas disponíveis</span><span class="stat-icon green">✓</span></div><strong id="stat-free">12</strong><small>Prontas para reserva</small></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel"><div class="panel-heading"><div><h3>Ocupação do estacionamento</h3><p>Visualização das vagas neste momento</p></div><span class="live-pill"><i></i> Atualizado</span></div><div class="occupancy" id="occupancy-grid"></div><div class="legend"><span><i class="legend-free"></i> Disponível</span><span><i class="legend-busy"></i> Ocupada</span></div></article>
+          <article class="panel activity-panel"><div class="panel-heading"><div><h3>Resumo rápido</h3><p>Informações do estacionamento</p></div></div><div class="summary-line"><span>Taxa de ocupação</span><strong id="occupancy-rate">0%</strong></div><div class="progress"><span id="occupancy-bar"></span></div><div class="summary-line"><span>Reservas registradas</span><strong id="summary-bookings">0</strong></div><div class="summary-line"><span>Capacidade livre</span><strong id="summary-free">12 vagas</strong></div><button class="secondary-btn full-btn" data-go="cadastradas">Ver todas as reservas <span>→</span></button></article>
+        </div>
+        <div class="note"><span>✦</span><p><strong>Dica:</strong> mantenha os dados dos veículos e dos moradores atualizados para facilitar a organização do estacionamento.</p></div>
+      </section>
+
+      <section class="page" id="page-cadastro">
+        <div class="section-intro"><div><span class="eyebrow">ESTACIONAMENTO / CADASTRO</span><h2>Cadastrar nova reserva</h2><p>Preencha os dados do proprietário e do veículo para registrar uma vaga.</p></div></div>
+        <form id="reservation-form" class="panel form-panel">
+          <div class="form-section-title"><span class="form-step">01</span><div><h3>Dados do proprietário</h3><p>Identificação do morador responsável pela reserva.</p></div></div>
+          <div class="form-grid">
+            <label class="field span-2">Nome do proprietário <b>*</b><input id="owner" name="owner" type="text" placeholder="Ex.: Maria Oliveira" maxlength="70" required></label>
+            <label class="field">Número do apartamento <b>*</b><input id="apartment" name="apartment" type="text" placeholder="Ex.: 302" maxlength="10" required></label>
+            <label class="field">Bloco <b>*</b><input id="block" name="block" type="text" placeholder="Ex.: Bloco A" maxlength="20" required></label>
+          </div>
+          <div class="form-divider"></div>
+          <div class="form-section-title"><span class="form-step">02</span><div><h3>Dados do veículo</h3><p>Informe as características para identificação do automóvel.</p></div></div>
+          <div class="form-grid">
+            <label class="field">Placa do veículo <b>*</b><input id="plate" name="plate" type="text" placeholder="ABC1D23" maxlength="7" required></label>
+            <label class="field">Modelo do veículo <b>*</b><input id="model" name="model" type="text" placeholder="Ex.: Honda Civic" maxlength="50" required></label>
+            <label class="field">Cor do veículo <b>*</b><input id="color" name="color" type="text" placeholder="Ex.: Prata" maxlength="25" required></label>
+            <label class="field">Número da vaga <b>*</b><select id="spot" name="spot" required><option value="">Selecione uma vaga disponível</option></select></label>
+          </div>
+          <div class="form-footer"><span><b>*</b> Campos obrigatórios</span><div><button type="reset" class="cancel-btn">Limpar</button><button type="submit" class="primary-btn">Salvar reserva <span>→</span></button></div></div>
+        </form>
+      </section>
+
+      <section class="page" id="page-cadastradas">
+        <div class="section-intro section-between"><div><span class="eyebrow">ESTACIONAMENTO / GERENCIAMENTO</span><h2>Reservas cadastradas</h2><p>Consulte os dados dos moradores e veículos registrados.</p></div><button class="primary-btn" data-go="cadastro">＋ Nova reserva</button></div>
+        <div class="panel table-panel"><div class="table-toolbar"><div><h3>Lista de reservas</h3><p id="booking-count">0 registros encontrados</p></div><input type="search" id="booking-search" class="search-input" placeholder="⌕  Buscar por nome ou placa..."></div><div class="table-wrap"><table><thead><tr><th>PROPRIETÁRIO</th><th>VEÍCULO</th><th>APARTAMENTO</th><th>VAGA</th><th>STATUS</th><th>AÇÃO</th></tr></thead><tbody id="bookings-body"></tbody></table></div><div id="bookings-empty" class="empty-state"><span>▤</span><strong>Nenhuma reserva cadastrada</strong><p>Quando uma reserva for criada, ela aparecerá nesta lista.</p><button class="secondary-btn" data-go="cadastro">Cadastrar primeira reserva</button></div></div>
+      </section>
+
+      <section class="page" id="page-disponiveis">
+        <div class="section-intro"><div><span class="eyebrow">ESTACIONAMENTO / DISPONIBILIDADE</span><h2>Vagas disponíveis</h2><p>Acompanhe quais vagas podem ser utilizadas pelos moradores.</p></div></div>
+        <div class="availability-summary"><div><span class="stat-icon green">✓</span><div><strong id="available-number">12</strong><small>Vagas livres</small></div></div><div><span class="stat-icon orange">▣</span><div><strong id="occupied-number">0</strong><small>Vagas ocupadas</small></div></div></div>
+        <div class="panel"><div class="panel-heading"><div><h3>Mapa de vagas</h3><p>Selecione uma vaga livre ao cadastrar uma reserva.</p></div><span class="live-pill"><i></i> Situação atual</span></div><div class="parking-grid" id="parking-grid"></div><div class="legend"><span><i class="legend-free"></i> Disponível</span><span><i class="legend-busy"></i> Ocupada</span></div></div>
+      </section>
+      <footer class="footer">ParkControl <span>•</span> Sistema acadêmico de controle de estacionamento</footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
